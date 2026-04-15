@@ -62,7 +62,7 @@ export default function LandingPage() {
 
       <main className="w-[96%] bg-[#FDF8F6] rounded-[20px] shadow-[0_40px_100px_rgba(0,0,0,0.4)] flex flex-col min-h-[90vh] mt-4 mb-12 z-10">
         {/* Card Grid Area */}
-        <div className="px-8 lg:px-24 py-20 grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-24">
+        <div className="px-12 lg:px-28 py-24 pb-32 grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-24">
           {CARDS.map((card, index) => {
             const isActive = card.status === "active";
             const accentBg = isActive ? "#FFE4E4" : "#E5E7EB";
