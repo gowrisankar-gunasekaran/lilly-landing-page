@@ -161,7 +161,7 @@ export default function LandingPage() {
                       className="inline-flex"
                     >
                       {isActive ? (
-                        <button className="bg-[#251f91] hover:bg-[#2f2781] text-white px-4 py-2 h-auto flex items-center justify-center rounded-[8px] font-bold text-[14px] shadow-sm transition-all duration-200 hover:shadow-[0_4px_14px_rgba(79,70,229,0.4)] border-none cursor-pointer">
+                        <button className="bg-[#12518E] hover:bg-[#0e406e] text-white px-4 py-2 h-auto flex items-center justify-center rounded-[8px] font-bold text-[14px] shadow-sm transition-all duration-200 hover:shadow-[0_4px_14px_rgba(18,81,142,0.4)] border-none cursor-pointer">
                           {card.buttonText}
                         </button>
                       ) : (
