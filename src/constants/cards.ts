@@ -1,0 +1,48 @@
+export const CARDS = [
+  {
+    title: "Revenue Defender (RDAAP)",
+    description:
+      "Easily detect rebate, copay, and pharmacy anomalies to cut risk and boost compliance.",
+    buttonText: "Go to RDAAP",
+    status: "active",
+    image: "/dashboard_anomaly_v2.png",
+    accent: "#FFE4E4",
+    href: process.env.NEXT_PUBLIC_RDAAP_URL || "/rdaap",
+  },
+  {
+    title: "Intellipay",
+    description: "Intelligent Payment Automation Platform.",
+    buttonText: "Go to Intellipay",
+    status: "active",
+    image: "/dashboard_intellipay_v2.png",
+    accent: "#FFE4E4",
+    href: process.env.NEXT_PUBLIC_INTELLIPAY_URL || "/intellipay",
+  },
+  {
+    title: "Formulens",
+    description: "Description for Formulens",
+    buttonText: "Coming soon",
+    status: "coming-soon",
+    image: "/dashboard_anomaly_v2.png",
+    accent: "#E5E7EB",
+    href: process.env.NEXT_PUBLIC_FORMULENS_URL || "/formulens",
+  },
+  {
+    title: "Dashboards",
+    description: "Description for Dashboards",
+    buttonText: "Coming soon",
+    status: "coming-soon",
+    image: "/dashboard_intellipay_v2.png",
+    accent: "#E5E7EB",
+    href: process.env.NEXT_PUBLIC_DASHBOARDS_URL || "/dashboards",
+  },
+  {
+    title: "Automation Scripts",
+    description: "Description for Automation Scripts",
+    buttonText: "Coming soon",
+    status: "coming-soon",
+    image: "/dashboard_anomaly_v2.png",
+    accent: "#E5E7EB",
+    href: process.env.NEXT_PUBLIC_AUTOMATION_SCRIPTS_URL || "/automation-scripts",
+  },
+];
