@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #0F172A !important;
+  background-color: #1E2A30 !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
   height: auto !important;
@@ -14,7 +14,7 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0F172A;
+  background: #1e2a30;
 }
 ::-webkit-scrollbar-thumb {
   background: #334155;
