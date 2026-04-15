@@ -3,7 +3,7 @@
 body {
   margin: 0;
   padding: 0;
-  background-color: #5d1d1c !important;
+  background-color: #0F172A !important;
   overflow-y: auto !important;
   overflow-x: hidden !important;
   height: auto !important;
@@ -14,9 +14,12 @@ body {
   width: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #5d1d1c;
+  background: #0F172A;
 }
 ::-webkit-scrollbar-thumb {
-  background: #8b2d2b;
+  background: #334155;
   border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #475569;
 }

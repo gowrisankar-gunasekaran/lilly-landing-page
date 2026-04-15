@@ -1,8 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { UserCircle, CaretDown } from "@phosphor-icons/react";
+import { UserCircle, CaretDown, SignOut } from "@phosphor-icons/react";
 import Image from "next/image";
 import Link from "next/link";
 import { LillyLogo } from "@/components/shared/icons/LillyLogo";
@@ -11,30 +11,53 @@ import "@/styles/landing.css";
 
 export default function LandingPage() {
   const [profileOpen, setProfileOpen] = useState(false);
+  const profileRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (profileRef.current && !profileRef.current.contains(event.target as Node)) {
+        setProfileOpen(false);
+      }
+    };
+
+    if (profileOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [profileOpen]);
 
   return (
-    <div className="min-h-screen w-full bg-[#5D1D1C] flex flex-col items-center overflow-y-auto overflow-x-hidden selection:bg-red-100">
+    <div
+      className="min-h-screen w-full flex flex-col items-center overflow-y-auto overflow-x-hidden selection:bg-indigo-100"
+      style={{
+        background:
+          "linear-gradient(145deg, #0F172A 0%, #1E293B 40%, #0F172A 100%)",
+      }}
+    >
       {/* Header - Transparent Bar with Black Pills */}
-      <header className="w-full mt-4 h-18 flex items-center justify-between px-6 z-50">
+      <header className="w-full mt-2 h-16 flex items-center justify-between px-4 z-50">
         {/* Left Pill */}
-        <div className="bg-black rounded-full h-14 flex items-center px-8 gap-6 shadow-lg border border-white/5">
+        <div className="bg-black rounded-full h-12 flex items-center px-6 gap-6 shadow-lg border border-white/5">
           <div className="flex items-center transform scale-90">
             <LillyLogo name="Lilly" />
           </div>
           <div className="h-6 w-[1px] bg-white/30" />
-          <span className="text-white font-bold text-xl tracking-wide">
+          <span className="text-white font-bold text-lg tracking-wide">
             C.A. 360
           </span>
         </div>
 
         {/* Right Pill */}
-        <div className="relative">
+        <div className="relative" ref={profileRef}>
           <button
             onClick={() => setProfileOpen(!profileOpen)}
-            className="flex items-center gap-3 bg-black hover:bg-black/80 transition-all h-14 px-6 rounded-full text-white group shadow-lg border border-white/5"
+            className="flex items-center gap-3 bg-black hover:bg-black/80 transition-all h-12 px-5 rounded-full text-white group shadow-lg border border-white/5"
           >
-            <UserCircle size={28} weight="light" className="text-white/80" />
-            <span className="font-bold text-sm">Kruna Kumar</span>
+            <UserCircle size={24} weight="light" className="text-white/80" />
+            <span className="font-bold text-xs">Kruna Kumar</span>
             <CaretDown
               size={12}
               weight="bold"
@@ -46,26 +69,53 @@ export default function LandingPage() {
           <AnimatePresence>
             {profileOpen && (
               <motion.div
-                initial={{ opacity: 0, y: 10 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: 10 }}
-                className="absolute right-0 mt-2 w-48 bg-[#151515] rounded-2xl p-2 shadow-2xl border border-white/5"
+                initial={{ opacity: 0, y: 10, scale: 0.97 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: 10, scale: 0.97 }}
+                transition={{ duration: 0.15 }}
+                className="absolute right-0 mt-3 w-56 bg-[#131313] rounded-[20px] shadow-[0_20px_60px_rgba(0,0,0,0.6)] border border-white/8 overflow-hidden"
               >
-                <button className="w-full flex items-center gap-3 px-4 py-3 text-white hover:bg-white/10 rounded-xl transition-colors text-sm font-medium">
-                  <span className="opacity-70">Signout</span>
-                </button>
+                {/* Profile Label */}
+                <div className="px-5 pt-4 pb-1">
+                  <span className="text-xs font-semibold text-white/40 tracking-widest uppercase">
+                    Profile
+                  </span>
+                </div>
+
+                {/* User Row */}
+                <div className="flex items-center gap-3 px-5 py-3">
+                  <UserCircle
+                    size={32}
+                    weight="light"
+                    className="text-white/70 shrink-0"
+                  />
+                  <span className="font-bold text-white text-[14px]">
+                    Kruna Kumar
+                  </span>
+                </div>
+
+                {/* Divider */}
+                <div className="mx-5 my-2 h-[1px] bg-white/8" />
+
+                {/* Signout Button */}
+                <div className="px-4 pb-4 pt-1">
+                  <button className="w-full flex items-center justify-center gap-2 px-3 py-2 rounded-full border-2 border-[#E05252] text-[#E05252] hover:bg-[#E05252]/10 transition-all duration-200 font-bold text-[13px] cursor-pointer">
+                    <SignOut size={16} weight="bold" />
+                    Signout
+                  </button>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
         </div>
       </header>
 
-      <main className="w-[96%] bg-[#FDF8F6] rounded-[20px] shadow-[0_40px_100px_rgba(0,0,0,0.4)] flex flex-col min-h-[90vh] mt-4 mb-12 z-10">
+      <main className="w-[92%] bg-[#FDF8F6] rounded-[20px] shadow-[0_40px_100px_rgba(0,0,0,0.4)] flex flex-col min-h-[90vh] mt-2 mb-8 z-10">
         {/* Card Grid Area */}
-        <div className="px-12 lg:px-28 py-24 pb-32 grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-24">
+        <div className="px-8 lg:px-20 py-16 pb-24 grid grid-cols-1 lg:grid-cols-2 gap-x-16 gap-y-20">
           {CARDS.map((card, index) => {
             const isActive = card.status === "active";
-            const accentBg = isActive ? "#FFE4E4" : "#E5E7EB";
+            const accentBg = isActive ? "#EEF2FF" : "#E5E7EB";
 
             return (
               <motion.div
@@ -74,7 +124,7 @@ export default function LandingPage() {
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.05 }}
-                className={`relative flex flex-col h-full pt-10 ${index === 4 ? "lg:col-start-1" : ""}`}
+                className={`relative flex flex-col h-full pt-8 ${index === 4 ? "lg:col-start-1" : ""}`}
               >
                 {/* Accent Background Layer */}
                 <div
@@ -95,11 +145,11 @@ export default function LandingPage() {
                 </div>
 
                 {/* Main White Card Body */}
-                <div className="relative z-10 w-full flex flex-col flex-1 bg-white rounded-[20px] p-8 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-[#E5E7EB] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
-                  <h2 className="text-[26px] font-bold text-[#1f2937] mb-3 tracking-tight">
+                <div className="relative z-10 w-full flex flex-col flex-1 bg-white rounded-[20px] p-6 shadow-[0_4px_24px_rgba(0,0,0,0.04)] border border-[#E5E7EB] transition-all hover:shadow-[0_8px_30px_rgba(0,0,0,0.08)]">
+                  <h2 className="text-[24px] font-bold text-[#1f2937] mb-3 tracking-tight">
                     {card.title}
                   </h2>
-                  <p className="text-[#4b5563] text-[16px] mb-8 leading-relaxed flex-1">
+                  <p className="text-[#4b5563] text-[15px] mb-8 leading-relaxed flex-1">
                     {card.description}
                   </p>
 
@@ -111,11 +161,11 @@ export default function LandingPage() {
                       className="inline-flex"
                     >
                       {isActive ? (
-                        <button className="bg-[#cc2222] hover:bg-[#b31e1e] text-white px-5 py-2.5 h-auto flex items-center justify-center rounded-[8px] font-bold text-[15px] shadow-sm transition-colors border-none cursor-pointer">
+                        <button className="bg-[#251f91] hover:bg-[#2f2781] text-white px-4 py-2 h-auto flex items-center justify-center rounded-[8px] font-bold text-[14px] shadow-sm transition-all duration-200 hover:shadow-[0_4px_14px_rgba(79,70,229,0.4)] border-none cursor-pointer">
                           {card.buttonText}
                         </button>
                       ) : (
-                        <button className="inline-flex items-center px-5 py-2.5 bg-[#F3F4F6] text-[#6b7280] rounded-[8px] font-bold text-[15px] border border-[#E5E7EB] hover:bg-[#E5E7EB] transition-colors cursor-pointer">
+                        <button className="inline-flex items-center px-4 py-2 bg-[#F3F4F6] text-[#6b7280] rounded-[8px] font-bold text-[14px] border border-[#E5E7EB] hover:bg-[#E5E7EB] transition-colors cursor-pointer">
                           {card.buttonText}
                         </button>
                       )}
